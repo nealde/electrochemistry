@@ -69,7 +69,7 @@ layout = html.Div([
     html.Div(id='graphs'),
     html.Div([
         html.Div(children=['E (applied voltage): 0.5 Volts'],id='g1_E_label'),
-        dcc.Slider(id = 'g1_E', max=3, min=0, step=0.01, updatemode='drag', value=0.5, marks = {0.01: 0, 3: 3}),
+        dcc.Slider(id = 'g1_E', max=3, min=0, step=0.01, updatemode='drag', value=2.5, marks = {0.01: 0, 3: 3}),
         html.P('Rs (resistance): 1 Ohms', id='g1_Rs_label'),
         dcc.Slider(id = 'g1_Rs', max=3, min=0, step=0.01, updatemode='drag', value=1, marks = {0.01: 0, 3: 3}),
         html.P('Cd (interface capacitance): 20 Farads', id='g1_Cd_label'),
@@ -156,24 +156,21 @@ layout = html.Div([
 
     ''')),
 #    dcc.Markdown(dedent('''
+    html.H3('Chapter 1.5 - Nernstian Reactions with Coupled Chemical Reactions'),
     html.P('''
-    ### Chapter 1.5 - Nernstian Reactions with Coupled Chemical Reactions
     $$E = E^{0'} + \\frac{RT}{nF}ln\frac{m_R+\mu k}{m_O}+\\frac{RT}{nF}ln(\\frac{i_l-i}{i}) $$
 
     $$ E = E_{1/2}' + \\frac{0.059}{n}ln\\frac{m_R+\mu k}{m_O} $$
 
-    $$ m_R=0.62D_R^{2/3}v^{-1/6}\omega ^{1/2} $$
-
-    ##### Unperturbed equation:
-
-    $$ E'_{1/2} = E_{1/2} + \\frac{0.059}{n}ln\\frac{\mu k}{m_R} $$
-
-    ##### Rotating equation:
-
-    $$ E'_{1/2} = E_{1/2} + \\frac{0.059}{n}ln\\frac{\mu k}{0.62D_R^{2/3}v^{-1/6}} - \\frac{0.059}{n}ln \omega $$  '''),
+    $$ m_R=0.62D_R^{2/3}v^{-1/6}\omega ^{1/2} $$'''),
+    html.H5('Unperturbed equation:'),
+    html.P("$$ E'_{1/2} = E_{1/2} + \\frac{0.059}{n}ln\\frac{\mu k}{m_R} $$"),
+    html.H5('Rotating equation:'),
+    html.P("$$ E'_{1/2} = E_{1/2} + \\frac{0.059}{n}ln\\frac{\mu k}{0.62D_R^{2/3}v^{-1/6}} - \\frac{0.059}{n}ln \omega $$"),
 
 
-#    html.Img(src='data:image/png;base64,{}'.format(img4.decode())),
+
+    html.Img(src='data:image/png;base64,{}'.format(img4.decode())),
 #
 #    dcc.Markdown(dedent('''
 #    ##### 3-electrode cells for measuring electrochemical cell resistance''')),
@@ -206,8 +203,8 @@ layout = html.Div([
         html.P('DR 0.02', id='g2_DR_label'),
         dcc.Slider(id = 'g2_DR', max=.8, min=0, step=0.01, updatemode='drag', value=.02, marks = {0.01: 0, .8: .8}),
 
-        html.P('v 0.03', id='g2_v_label'),
-        dcc.Slider(id = 'g2_v', max=.8, min=0, step=0.01, updatemode='drag', value=.03, marks = {0.01: 0, .8: .8}),
+        html.P('v 0.3', id='g2_v_label'),
+        dcc.Slider(id = 'g2_v', max=.8, min=0, step=0.01, updatemode='drag', value=.3, marks = {0.01: 0, .8: .8}),
 
         html.P('\(\omega\) 3', id='g2_w_label'),
         dcc.Slider(id = 'g2_w', max=60, min=0, step=0.01, updatemode='drag', value=3, marks = {0.01: 0, 60: 60})
@@ -292,23 +289,10 @@ label_list = ['']
 @app.callback(Output('graphs_disk','children'),
              [Input('g2_{}'.format(i),'value') for i in l1])
 def update_Graph1(E,il,n,u,k,mR,DR,v,w):
-#    print(dropdown)
-#    x = np.linspace(1e-5, 60, 200)
-#    Rs = 1
-#    Cd = 20
-     # step
-#    y1 = x*E*1/x
-#    y2 = E/Rs*np.exp(-x/(Rs*Cd))
+
     x = np.linspace(1e-5, 50, 200)
     E_half = E
-#    il=60
-#    n=0.01
-#    u=.01
-#    k=1
-#    mR=0.5
-#    DR=0.02
-#    v=0.3
-#    w=3
+
     E_half_1 = E_half+0.059/n*np.log(u*k/mR)
     E_half_2 = E_half+0.059/n*np.log(u*k/(0.62*DR**(2/3)*v**(-1/6)))-0.059/n*np.log(w)
 #    w=6

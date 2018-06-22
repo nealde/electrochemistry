@@ -12,6 +12,11 @@ from apps import home, chapter1, app2
 #app.scripts.append_script({ 'external_url' : mathjax })
 app.css.append_css({'external_url':
                     'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})
+
+# load katex
+app.css.append_css({'external_url':
+                    "https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css"})
+
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content')
