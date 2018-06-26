@@ -10,18 +10,6 @@ import os
 STATIC_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'CH1')
 
 from app import app
-# import all the images
-
-img1 = base64.b64encode(open('CH1/fig_1_2_3.png', 'rb').read())
-img2 = base64.b64encode(open('CH1/fig_1_2_5.png', 'rb').read())
-img3 = base64.b64encode(open('CH1/fig_1_3_5.png', 'rb').read())
-img4 = base64.b64encode(open('CH1/fig_1_3_6.png', 'rb').read())
-#img5 = base64.b64encode(open('CH1/fig_1_3_10.png', 'rb').read())
-#img6 = base64.b64encode(open('CH1/fig_1_3_12.png', 'rb').read())
-#img7 = base64.b64encode(open('CH1/fig_1_4_1.png', 'rb').read())
-#img8 = base64.b64encode(open('CH1/fig_1_4_4.png', 'rb').read())
-#img9 = base64.b64encode(open('CH1/fig_1_5_1.png', 'rb').read())
-
 
 # set lists for dropdowns
 s1 = ['step','ramp','triangle']
@@ -29,15 +17,15 @@ s1 = ['step','ramp','triangle']
 layout = html.Div([
     dcc.Markdown(dedent('''
     ### Table of Contents:
-  * [Chapter 1.2](#chapter-2) Double Layer Capacitance
-  * [Chapter 1.3](#chapter-3) Fardaic Processes
-  * [Chapter 1.4](#chapter-4) Modes of Mass Transfer
-  * [Chapter 1.5](#chapter-5) Nernstian Reactions with Coupled Chemical Reactions
-  ''')),
+  * **Chapter 1.2** Double Layer Capacitance
+  * **Chapter 1.3** Fardaic Processes
+  * **Chapter 1.4** Modes of Mass Transfer
+  * **Chapter 1.5** Nernstian Reactions with Coupled Chemical Reactions
+    ''')),
 
     html.H3('Chapter 1.2 - Double Layer Capacitance'),
     html.Div([
-    html.Img(src='data:image/png;base64,{}'.format(img1.decode())),
+    html.Div([html.Img(src='https://github.com/nealde/electrochemistry/raw/master/CH1/fig_1_2_3.png')]),
     ],
     style={
         'minHeight':'100px',
@@ -53,19 +41,20 @@ layout = html.Div([
         '''),
         dcc.Markdown(dedent('''
         The relationship between a **voltage step** and the *response current* is given by:
-        $$i = \\frac{E}{R_s}e^{(-t/(R_sC_d))}$$
+        $$ i = \\frac{E}{R_s}e^{(-t/(R_sC_d))} $$
 
         The **charge stored** during this event can be represented by the following:
-        $$q = EC_d(1-e^{(-t/(R_sC_d))})$$
+        $$ q = EC_d(1-e^{(-t/(R_sC_d))}) $$
 
         ''')),
-        html.Img(src='data:image/png;base64,{}'.format(img2.decode()))
+        html.Div([html.Img(src='https://github.com/nealde/electrochemistry/raw/master/CH1/fig_1_2_5.png')]),
     ], style={'width':'80%'}),
+    html.Div([
     dcc.Dropdown(
         id='graph1-input',
         options=[{'label': s, 'value': i} for i,s in enumerate(s1)],
         value = 0,
-    ),
+    ),]),
     html.Div(id='graphs'),
     html.Div([
         html.Div(children=['E (applied voltage): 0.5 Volts'],id='g1_E_label'),
@@ -78,7 +67,6 @@ layout = html.Div([
     ], style= {'textAlign': 'center'}),
     html.Div([
     dcc.Markdown(dedent('''
-
 
     ### Chapter 1.3 - Faradaic Processes
     ##### Galvanic cells - Reactions occur spontaneously at the electrodes when connected by a conductor.
@@ -98,19 +86,9 @@ layout = html.Div([
     * Extent of polarization is measured by overpotential
     $$ \eta = E - E_{eq} $$
 
-    ''')),
-#    html.Div([
-#        html.P('hello $$ \eta = E - E_{eq} $$'),
-##        html.Img(src='data:image/png;base64,{}'.format(img1.decode())),
-#    ]),
-#    html.Div([
-#    html.Img(src='data:image/png;base64,{}'.format(img1.decode()))
-#    ],
-#    style={
-#        'minHeight':'100px',
-#        'vertical-align': 'middle'},
-#    ),
-#    html.P(children='Delicious \(\pi\) is inline with my goals.'),
+    ''')),]),
+    html.Div([html.Img(src='https://github.com/nealde/electrochemistry/raw/master/CH1/fig_1_3_5.png', style={'width':'90%'})]),
+    html.Div([
     dcc.Markdown(dedent('''
 
     ##### Factors affecting electrode reaction rate and current
@@ -121,8 +99,15 @@ layout = html.Div([
     *rate constants may be dependent upon potential*
     **Overpotential** is the sum of terms associated with each step - *mass transfer overpotential*, *charge-transfer overpotential*, etc
     $$ E_{applied} = E_{cd}-iR_s=E_{eq,cd}+\eta-iR_s $$
-    The above indicates that the *overpotential* and *bulk soluion resistance* should be counted separately''')),
+    The above indicates that the *overpotential* and *bulk solution resistance* should be counted separately''')),
+#
+    ]),
 
+    html.Div([html.Img(src='https://github.com/nealde/electrochemistry/raw/master/CH1/fig_1_3_6.png', style={'width':'90%'})]),
+    html.Div([html.Img(src='https://github.com/nealde/electrochemistry/raw/master/CH1/fig_1_3_10.png', style={'width':'90%'})]),
+    html.Div([html.Img(src='https://github.com/nealde/electrochemistry/raw/master/CH1/fig_1_3_12.png', style={'width':'90%'})]),
+#], className='container')
+        html.Div([
     dcc.Markdown(dedent('''
     ### Chapter 1.4 - Modes of Mass Transfer
     If an eelctrode process has fast, heterogeneous charge-transfer kinetics and mobile, reversible homogeneous equations:
@@ -137,7 +122,9 @@ layout = html.Div([
     Mass transfer to an electrode is governed by the *Nernst-Planck equation (1D)*
     $$J_{i}(x) = -D_{i}\\frac{\partial C_i(x) }{\partial x}-\\frac{z_iF}{RT}D_iC_i\\frac{\partial \phi (x) }{\partial x} +C_iv(x)$$
 
-    The transport of C to the electrode is mass-transfer limited, such that the diffusion layer thickness is always constant as long as D is constant.
+    The transport of C to the electrode is mass-transfer limited, such that the diffusion layer thickness is always constant as long as D is constant.''')),
+    html.Div([html.Img(src='https://github.com/nealde/electrochemistry/raw/master/CH1/fig_1_4_1.png', style={'width':'90%'})]),
+    dcc.Markdown(dedent('''
 
     $$ \\frac{i}{nFA}=m_O[C^*_O-C_O(x=0)] $$
 
@@ -155,6 +142,7 @@ layout = html.Div([
     $$i = i_l, \eta_{conc} \\rightarrow \\infty$$
 
     ''')),
+    html.Div([html.Img(src='https://github.com/nealde/electrochemistry/raw/master/CH1/fig_1_4_4.png', style={'width':'50%'})]),
 #    dcc.Markdown(dedent('''
     html.H3('Chapter 1.5 - Nernstian Reactions with Coupled Chemical Reactions'),
     html.P('''
@@ -167,19 +155,8 @@ layout = html.Div([
     html.P("$$ E'_{1/2} = E_{1/2} + \\frac{0.059}{n}ln\\frac{\mu k}{m_R} $$"),
     html.H5('Rotating equation:'),
     html.P("$$ E'_{1/2} = E_{1/2} + \\frac{0.059}{n}ln\\frac{\mu k}{0.62D_R^{2/3}v^{-1/6}} - \\frac{0.059}{n}ln \omega $$"),
-
-
-
-    html.Img(src='data:image/png;base64,{}'.format(img4.decode())),
-#
-#    dcc.Markdown(dedent('''
-#    ##### 3-electrode cells for measuring electrochemical cell resistance''')),
-#    html.Div([
-#    html.Img(src='data:image/png;base64,{}'.format(img5.decode()), style={'width':'70%'}),
-#    html.Img(src='data:image/png;base64,{}'.format(img6.decode()), style={'width':'70%'}),
-#    html.Img(src='data:image/png;base64,{}'.format(img7.decode()), style={'width':'70%'}),
-#    ]),
     ]),
+    html.Div([html.Img(src='https://github.com/nealde/electrochemistry/raw/master/CH1/fig_1_5_1.png', style={'width':'90%'})]),
     html.Div(id='graphs_disk'),
     html.Div([
         html.Div(children=['E (applied voltage): 0.5 Volts'],id='g2_E_label'),
@@ -209,8 +186,7 @@ layout = html.Div([
         html.P('\(\omega\) 3', id='g2_w_label'),
         dcc.Slider(id = 'g2_w', max=60, min=0, step=0.01, updatemode='drag', value=3, marks = {0.01: 0, 60: 60})
 
-    ], style= {'textAlign': 'center'}),
-
+    ], style= {'textAlign': 'center'})
 ], className='container')
 
 

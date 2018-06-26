@@ -40,7 +40,7 @@ katex = src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js"
 app.scripts.append_script({ 'external_url' : katex })
 auto_render = "https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js"
 app.scripts.append_script({ 'external_url' : auto_render })
-app.scripts.append_script({"""renderMathInElement(document.body);"""})
+app.scripts.append_script({'external_url': "https://rawgit.com/nealde/electrochemistry/master/render.js"})
 
 
 app.layout = html.Div(id='main',children=[
